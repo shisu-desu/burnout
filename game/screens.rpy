@@ -94,8 +94,54 @@ style frame:
 ##
 ## https://www.renpy.org/doc/html/screen_special.html#say
 
+
+
+screen dictionary():
+
+    tag menu
+    add "black"
+
+    vbox:
+        xpos 60
+        ypos 60
+        spacing 20 
+
+        
+        if persistent.dict1_unlock:
+            text "{color=#f00}Хачироку{/color} - неофициальное обозночение моделей автомобилей Toyota Corolla Levin и Toyota Sprinter Trueno.\nАвтомобиль, приобревший легендарный статус в мировой культуре и особенно в дрифт культуре. Секрет успеха этой машины в портясающей общей сбалансированности. Задний привод, маленький вес, отличная управляемость и возможность тюнинга привлекли японских уличных гонщиков, которые начали использовать ее в гонках по горам.\n«Хачироку» в переводе с японского означает «восемь-шесть», что является названием серии самого автомобиля -\n AE86."
+         
+
+    textbutton _("Назад"):
+        hover_sound "audio/hover_menu.mp3"
+        activate_sound "audio/click_menu.mp3"
+        xalign 0.05 
+        yalign 0.95
+        action Return()
+
+
+screen guide(GuideMessage):
+    frame:
+        xalign 0.5
+        yalign 0.5
+        xsize 700
+        ysize 250
+        vbox:
+            xalign 0.5
+            ypos 50
+            text GuideMessage
+            text ""
+            textbutton _("ОК"):
+                hover_sound "audio/hover_menu.mp3"
+                activate_sound "audio/click_menu.mp3"
+                xalign 0.5
+                action Return()
+
+
+
+
 screen say(who, what):
     style_prefix "say"
+
 
     window:
         id "window"
@@ -106,6 +152,7 @@ screen say(who, what):
                 id "namebox"
                 style "namebox"
                 text who id "who"
+
 
         text what id "what"
 
@@ -126,7 +173,7 @@ style say_label is default
 style say_dialogue is default
 style say_thought is say_dialogue
 
-style namebox is default
+#style namebox is default
 style namebox_label is say_label
 
 
@@ -139,26 +186,34 @@ style window:
     background Image("gui/textbox.png", xalign=0.5, yalign=1.0)
 
 style namebox:
-    xpos gui.name_xpos
+    xpos 270
     xanchor gui.name_xalign
     xsize gui.namebox_width
-    ypos gui.name_ypos
+    ypos 17
     ysize gui.namebox_height
+    xalign 0.5
+    
+
+
 
     background Frame("gui/namebox.png", gui.namebox_borders, tile=gui.namebox_tile, xalign=gui.name_xalign)
     padding gui.namebox_borders.padding
 
 style say_label:
-    properties gui.text_properties("name", accent=True)
-    xalign gui.name_xalign
+    properties gui.text_properties("name")
+    xalign 0.5
     yalign 0.5
+    size 35
+    
+    
+    
 
 style say_dialogue:
     properties gui.text_properties("dialogue")
-
-    xpos gui.dialogue_xpos
-    xsize gui.dialogue_width
-    ypos gui.dialogue_ypos
+    xpos 290
+    xsize 1400
+    ypos 90
+    
 
     adjust_spacing False
 
@@ -247,7 +302,7 @@ screen quick_menu():
             style_prefix "quick"
 
             xalign 0.5
-            yalign 1.0
+            yalign 0.98
 
             textbutton _("Назад") action Rollback()
             textbutton _("История") action ShowMenu('history')
@@ -290,24 +345,52 @@ screen navigation():
     vbox:
         style_prefix "navigation"
 
-        xpos gui.navigation_xpos
-        yalign 0.5
+
+        if main_menu:
+            xpos gui.navigation_xpos
+            yalign 0.87
+        else:
+            xpos 100
+            yalign 0.87
 
         spacing gui.navigation_spacing
 
         if main_menu:
 
-            textbutton _("Начать") action Start()
+            textbutton _("Начать"):
+                hover_sound "audio/hover_menu.mp3"
+                activate_sound "audio/click_menu.mp3"
+                action Start()
 
         else:
 
-            textbutton _("История") action ShowMenu("history")
+            textbutton _("История"):
+                hover_sound "audio/hover_menu.mp3"
+                activate_sound "audio/click_menu.mp3"
+                action ShowMenu("history")
 
-            textbutton _("Сохранить") action ShowMenu("save")
+            textbutton _("Сохранить"):
+                hover_sound "audio/hover_menu.mp3"
+                activate_sound "audio/click_menu.mp3"
+                action ShowMenu("save")
 
-        textbutton _("Загрузить") action ShowMenu("load")
+        textbutton _("Загрузить"):
+            hover_sound "audio/hover_menu.mp3"
+            activate_sound "audio/click_menu.mp3"
+            action ShowMenu("load")
 
-        textbutton _("Настройки") action ShowMenu("preferences")
+        if persistent.dict1_unlock:
+            textbutton _("Словарь"):
+                hover_sound "audio/hover_menu.mp3"
+                activate_sound "audio/click_menu.mp3"
+                action ShowMenu("dictionary")
+
+            
+
+        textbutton _("Настройки"):
+            hover_sound "audio/hover_menu.mp3"
+            activate_sound "audio/click_menu.mp3"
+            action ShowMenu("preferences")
 
         if _in_replay:
 
@@ -315,20 +398,32 @@ screen navigation():
 
         elif not main_menu:
 
-            textbutton _("Главное меню") action MainMenu()
+            textbutton _("Главное меню"):
+                hover_sound "audio/hover_menu.mp3"
+                activate_sound "audio/click_menu.mp3"
+                action MainMenu()
 
-        textbutton _("Об игре") action ShowMenu("about")
+        textbutton _("Об игре"):
+            hover_sound "audio/hover_menu.mp3"
+            activate_sound "audio/click_menu.mp3"
+            action ShowMenu("about")
 
         if renpy.variant("pc") or (renpy.variant("web") and not renpy.variant("mobile")):
 
             ## Помощь не необходима и не относится к мобильным устройствам.
-            textbutton _("Помощь") action ShowMenu("help")
+            textbutton _("Помощь"):
+                hover_sound "audio/hover_menu.mp3"
+                activate_sound "audio/click_menu.mp3"
+                action ShowMenu("help")
 
         if renpy.variant("pc"):
 
             ## Кнопка выхода блокирована в iOS и не нужна на Android и в веб-
             ## версии.
-            textbutton _("Выход") action Quit(confirm=not main_menu)
+            textbutton _("Выход"):
+                hover_sound "audio/hover_menu.mp3"
+                activate_sound "audio/click_menu.mp3"
+                action Quit(confirm=not main_menu)
 
 
 style navigation_button is gui_button
@@ -340,6 +435,7 @@ style navigation_button:
 
 style navigation_button_text:
     properties gui.button_text_properties("navigation_button")
+    xalign 0.5
 
 
 ## Экран главного меню #########################################################
@@ -383,16 +479,16 @@ style main_menu_title is main_menu_text
 style main_menu_version is main_menu_text
 
 style main_menu_frame:
-    xsize 420
+    xsize 430
     yfill True
 
-    background "gui/overlay/main_menu.png"
+    #background "gui/overlay/main_menu.png"
 
 style main_menu_vbox:
-    xalign 1.0
+    xalign 0.05
     xoffset -30
     xmaximum 1200
-    yalign 1.0
+    yalign 0.05
     yoffset -30
 
 style main_menu_text:
@@ -417,20 +513,25 @@ style main_menu_version:
 screen game_menu(title, scroll=None, yinitial=0.0):
 
     style_prefix "game_menu"
+    
 
     if main_menu:
         add gui.main_menu_background
+
     else:
         add gui.game_menu_background
+
 
     frame:
         style "game_menu_outer_frame"
 
         hbox:
 
+
             ## Резервирует пространство для навигации.
             frame:
                 style "game_menu_navigation_frame"
+                
 
             frame:
                 style "game_menu_content_frame"
@@ -470,10 +571,15 @@ screen game_menu(title, scroll=None, yinitial=0.0):
 
     use navigation
 
-    textbutton _("Вернуться"):
-        style "return_button"
+    if not main_menu:
+        textbutton _("Вернуться"):
+            xpos 100
+            yalign 0.5
+            hover_sound "audio/hover_menu.mp3"
+            activate_sound "audio/click_menu.mp3"
+            style "return_button"
 
-        action Return()
+            action Return()
 
     label title
 
@@ -553,13 +659,13 @@ screen about():
         vbox:
 
             label "[config.name!t]"
-            text _("Версия [config.version!t]\n")
+            text _("Версия [config.version!t]\n") 
 
             ## gui.about обычно установлено в options.rpy.
             if gui.about:
                 text "[gui.about!t]\n"
 
-            text _("Сделано с помощью {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only].\n\n[renpy.license!t]")
+            text _("Сделано с помощью {a=https://www.renpy.org/}Ren'Py{/a} [renpy.version_only].")
 
 
 style about_label is gui_label
@@ -576,7 +682,7 @@ style about_label_text:
 ## как они почти одинаковые, оба реализованы по правилам третьего экрана —
 ## file_slots.
 ##
-## https://www.renpy.org/doc/html/screen_special.html#save 
+## https://www.renpy.org/doc/html/screen_special.html#save
 
 screen save():
 
@@ -632,6 +738,8 @@ screen file_slots(title):
 
                     button:
                         action FileAction(slot)
+                        hover_sound "audio/hover_menu.mp3"
+                        activate_sound "audio/click_menu.mp3"
 
                         has vbox
 
@@ -657,19 +765,34 @@ screen file_slots(title):
 
                     spacing gui.page_spacing
 
-                    textbutton _("<") action FilePagePrevious()
+                    textbutton _("<"):
+                        hover_sound "audio/hover_menu.mp3"
+                        activate_sound "audio/click_menu.mp3"
+                        action FilePagePrevious()
 
                     if config.has_autosave:
-                        textbutton _("{#auto_page}А") action FilePage("auto")
+                        textbutton _("{#auto_page}А"):
+                            hover_sound "audio/hover_menu.mp3"
+                            activate_sound "audio/click_menu.mp3" 
+                            action FilePage("auto")
 
                     if config.has_quicksave:
-                        textbutton _("{#quick_page}Б") action FilePage("quick")
+                        textbutton _("{#quick_page}Б"):
+                            hover_sound "audio/hover_menu.mp3"
+                            activate_sound "audio/click_menu.mp3" 
+                            action FilePage("quick")
 
                     ## range(1, 10) задаёт диапазон значений от 1 до 9.
                     for page in range(1, 10):
-                        textbutton "[page]" action FilePage(page)
+                        textbutton "[page]":
+                            hover_sound "audio/hover_menu.mp3"
+                            activate_sound "audio/click_menu.mp3"
+                            action FilePage(page)
 
-                    textbutton _(">") action FilePageNext()
+                    textbutton _(">"):
+                        hover_sound "audio/hover_menu.mp3"
+                        activate_sound "audio/click_menu.mp3" 
+                        action FilePageNext()
 
                 if config.has_sync:
                     if CurrentScreenName() == "save":
@@ -678,6 +801,8 @@ screen file_slots(title):
                             xalign 0.5
                     else:
                         textbutton _("Скачать Sync"):
+                            hover_sound "audio/hover_menu.mp3"
+                            activate_sound "audio/click_menu.mp3"
                             action DownloadSync()
                             xalign 0.5
 
@@ -736,15 +861,30 @@ screen preferences():
                     vbox:
                         style_prefix "radio"
                         label _("Режим экрана")
-                        textbutton _("Оконный") action Preference("display", "window")
-                        textbutton _("Полный") action Preference("display", "fullscreen")
+                        textbutton _("Оконный"):
+                            hover_sound "audio/hover_menu.mp3"
+                            activate_sound "audio/click_menu.mp3"
+                            action Preference("display", "window")
+                        textbutton _("Полный"):
+                            hover_sound "audio/hover_menu.mp3"
+                            activate_sound "audio/click_menu.mp3"
+                            action Preference("display", "fullscreen")
 
                 vbox:
                     style_prefix "check"
                     label _("Пропуск")
-                    textbutton _("Всего текста") action Preference("skip", "toggle")
-                    textbutton _("После выборов") action Preference("after choices", "toggle")
-                    textbutton _("Переходов") action InvertSelected(Preference("transitions", "toggle"))
+                    textbutton _("Всего текста"):
+                        hover_sound "audio/hover_menu.mp3"
+                        activate_sound "audio/click_menu.mp3" 
+                        action Preference("skip", "toggle")
+                    textbutton _("После выборов"):
+                        hover_sound "audio/hover_menu.mp3"
+                        activate_sound "audio/click_menu.mp3" 
+                        action Preference("after choices", "toggle")
+                    textbutton _("Переходов"):
+                        hover_sound "audio/hover_menu.mp3"
+                        activate_sound "audio/click_menu.mp3" 
+                        action InvertSelected(Preference("transitions", "toggle"))
 
                 ## Дополнительные vbox'ы типа "radio_pref" или "check_pref"
                 ## могут быть добавлены сюда для добавления новых настроек.
@@ -797,6 +937,8 @@ screen preferences():
                         null height gui.pref_spacing
 
                         textbutton _("Без звука"):
+                            hover_sound "audio/hover_menu.mp3"
+                            activate_sound "audio/click_menu.mp3"
                             action Preference("all mute", "toggle")
                             style "mute_all_button"
 
@@ -1164,8 +1306,14 @@ screen confirm(message, yes_action, no_action):
                 xalign 0.5
                 spacing 150
 
-                textbutton _("Да") action yes_action
-                textbutton _("Нет") action no_action
+                textbutton _("Да"):
+                    hover_sound "audio/hover_menu.mp3"
+                    activate_sound "audio/click_menu.mp3"
+                    action yes_action
+                textbutton _("Нет"):
+                    hover_sound "audio/hover_menu.mp3"
+                    activate_sound "audio/click_menu.mp3" 
+                    action no_action
 
     ## Правый клик и esc, как ответ "Нет".
     key "game_menu" action no_action

@@ -7,6 +7,7 @@
 
 ## Основное ####################################################################
 
+
 ## Читаемое название игры. Используется при установке стандартного заголовка
 ## окна, показывается в интерфейсе и отчётах об ошибках.
 ##
@@ -23,7 +24,7 @@ define gui.show_name = True
 
 ## Версия игры.
 
-define config.version = "0.1"
+define config.version = "0.2"
 
 
 ## Текст, помещённый в экран "Об игре". Поместите текст между тройными скобками.
@@ -48,7 +49,7 @@ define build.name = "Burnout"
 
 define config.has_sound = True
 define config.has_music = True
-define config.has_voice = True
+define config.has_voice = False
 
 
 ## Чтобы разрешить игроку тестировать громкость на звуковом или голосовом
@@ -62,7 +63,7 @@ define config.has_voice = True
 ## проигрываться в главном меню. Этот файл продолжит проигрываться во время
 ## игры, если не будет остановлен, или не начнёт проигрываться другой аудиофайл.
 
-define config.main_menu_music = "audio/main_menu_theme.mp3"
+define config.main_menu_music = "audio/mainmenu.mp3"
 
 
 ## Переходы ####################################################################
@@ -121,7 +122,7 @@ define config.window_hide_transition = Dissolve(.2)
 ## в то время как любая другая цифра — это количество символов, печатаемых в
 ## секунду.
 
-default preferences.text_cps = 0
+default preferences.text_cps = 80
 
 
 ## Стандартная задержка авточтения. Большие значения означают долгие ожидания, а

@@ -1,11 +1,11 @@
 ﻿
 # Определение персонажей игры.
-define f = Character('Отец', color="#c8ffc8")
-define mc = Character('Главный герой', color="#c8ffc8")
-define talker = Character("???", color="#c8ffc8")
-define b = Character("Братан", color="#c8ffc8")
-define m = Character("Мама", color="#c8ffc8")
-define g = Character("Дед", color="#c8ffc8")
+define f = Character('Отец', color="#ff5c68")
+define mc = Character('Главный герой', color="#e5a377")
+define talker = Character("???", color="#a2a2a2")
+define b = Character("Братан", color="#72b651")
+define m = Character("Мама", color="#a972fb")
+define g = Character("Дед", color="#bdbe62")
 
 #   «  »
 
@@ -17,6 +17,7 @@ define raindrops = "audio/Raindrops and Puddles.mp3"
 define afternoon = "audio/Afternoon.mp3"
 define citydrive = "audio/CityDrive.mp3"
 define drift = "audio/Drift.mp3"
+define broom = "audio/broom.mp3"
 
 
 # задники
@@ -38,6 +39,7 @@ image plane = "images/bg/plane.png"
 image mountain = "images/bg/mountains.jpg"
 
 # определение настроек
+
 define long_fade = Fade(1.0, 0.0, 1.0)
 define appearedfromright = ComposeTransition(dissolve, before=moveinright)
 transform normal_right:
@@ -64,6 +66,7 @@ label start:
 
     scene black 
     play music "audio/Terraria.mp3"
+
     "Да-да. Конечно. Супер, ждём все реквизиты на почту. И вам хорошего вечера."
     mc "Здравствуйте. В течение пары часов ждите реквизиты клиента на почте. Да, заявление у Вас на столе. Рад был с Вами работать. Спасибо, и Вам хорошего вечера."
     "Наконец-то. Это была самая сложная сделка в моей жизни."
@@ -264,7 +267,12 @@ label start:
     g "Заодно и на заправке мне поможешь."
     "Улыбаясь сказал дед"
     b "Я решил повторить за братом и тоже поступил. Но не за границу, а в соседнем городе."
-    g "Раз уж такое дело, можешь взять мою {b}{i}ХАЧИРОКУ{/i}."
+    g "Раз уж такое дело, можешь взять мою {color=#f00}{b}{i}ХАЧИРОКУ{/i}{/color}."
+    if not persistent.dict1_unlock:
+        $ persistent.dict1_unlock = True
+        play sound broom
+        call screen guide("Теперь вам открыт словарь!")
+        call screen guide("Проверь меню игры!")
     "Дедушка протянул мне ключи от машины."
     g "Она все равно стоит."
     "Я не верил своим глазам и ушам."
