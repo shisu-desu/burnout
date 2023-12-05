@@ -20,6 +20,8 @@ game/audio/main_menu_theme.mp3 matches ** (['all']).
 game/audio/nyoooooooooooom.mp3 matches ** (['all']).
 game/audio/penis-music.mp3 matches ** (['all']).
 game/audio/Raindrops and Puddles.mp3 matches ** (['all']).
+game/audio/ReceiveText.ogg matches ** (['all']).
+game/audio/SendText.ogg matches ** (['all']).
 game/audio/Terraria.mp3 matches ** (['all']).
 game/audio/turbulentnost.mp3 matches ** (['all']).
 game/cache/ matches ** (['all']).
@@ -205,6 +207,7 @@ game/gui/window_icon.png matches ** (['all']).
 game/gui.rpy matches ** (['all']).
 game/gui.rpy.1.bak matches **.bak (None).
 game/gui.rpyc matches ** (['all']).
+game/icon.png matches ** (['all']).
 game/images/ matches ** (['all']).
 game/images/aneme_mc.png matches ** (['all']).
 game/images/bg/ matches ** (['all']).
@@ -232,8 +235,16 @@ game/images/chars/dad.png matches ** (['all']).
 game/images/chars/grandpa.png matches ** (['all']).
 game/images/chars/mom.png matches ** (['all']).
 game/images/father.png matches ** (['all']).
+game/images/phone_background.png matches ** (['all']).
+game/images/phone_foreground.png matches ** (['all']).
+game/images/phone_received_frame.png matches ** (['all']).
+game/images/phone_received_icon.png matches ** (['all']).
+game/images/phone_send_frame.png matches ** (['all']).
+game/images/phone_send_icon.png matches ** (['all']).
 game/options.rpy matches ** (['all']).
 game/options.rpyc matches ** (['all']).
+game/PhoneTexting.rpy matches ** (['all']).
+game/PhoneTexting.rpyc matches ** (['all']).
 game/saves/ matches game/saves/ (None).
 game/screens.rpy matches ** (['all']).
 game/screens.rpy.1.bak matches **.bak (None).
@@ -247,12 +258,15 @@ game/tl/None/common.rpymc matches ** (['all']).
 log.txt matches log.txt (None).
 project.json matches project.json (None).
 traceback.txt matches traceback.txt (None).
+.git/ matches **/.* (None).
 burnout/ doesn't match anything.
 burnout/ matches None (None).
 Burnout-0.1-dists/ doesn't match anything.
 Burnout-0.1-dists/ matches None (None).
 Burnout-0.2-dists/ doesn't match anything.
 Burnout-0.2-dists/ matches None (None).
+Burnout-0.3-dists/ doesn't match anything.
+Burnout-0.3-dists/ matches None (None).
 doc/ doesn't match anything.
 doc/ matches None (None).
 gui/ doesn't match anything.
