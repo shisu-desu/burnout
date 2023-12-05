@@ -1,68 +1,4 @@
-﻿
-# Определение персонажей игры.
-define f = Character('Отец', color="#ff5c68")
-define mc = Character('Главный герой', color="#e5a377")
-define talker = Character("???", color="#a2a2a2")
-define b = Character("Братан", color="#72b651")
-define m = Character("Мама", color="#a972fb")
-define g = Character("Дед", color="#bdbe62")
-
-#   «  »
-
-# music
-
-define daylight = "audio/Daylight.mp3"
-define air_guitar = "audio/Air Guitar.mp3"
-define raindrops = "audio/Raindrops and Puddles.mp3"
-define afternoon = "audio/Afternoon.mp3"
-define citydrive = "audio/CityDrive.mp3"
-define drift = "audio/Drift.mp3"
-define broom = "audio/broom.mp3"
-
-
-# задники
-image white = "#ffffff"
-image opening_dad = "images/bg/op_inacar.png"
-image airport_outside = im.FactorScale("images/bg/airport_outside.png", 1.5)
-image airport = "images/bg/airport.png"
-image gasstation = im.FactorScale("images/bg/gasstation.png", 2.0)
-image gasstation_night = im.FactorScale("images/bg/gasstation_night.png", 2.0)
-image house_dining = im.FactorScale("images/bg/house_dining.jpg", 2.0)
-image house_ent = im.FactorScale("images/bg/house_ent.jpg", 2.0)
-image house_ext = im.FactorScale("images/bg/house_ext.jpg", 2.0)
-image house_kitchen = im.FactorScale("images/bg/house_kitchen.jpg", 2.0)
-image house_living = im.FactorScale("images/bg/house_living.jpg", 2.0)
-image inside_86 = im.FactorScale("images/bg/inside_86.png", 1.8)
-image jdm = im.FactorScale("images/bg/jdm.png", 1.2)
-image jdm2 = "images/bg/jdm2.png"
-image plane = "images/bg/plane.png"
-image mountain = "images/bg/mountains.jpg"
-
-# определение настроек
-
-define long_fade = Fade(1.0, 0.0, 1.0)
-define appearedfromright = ComposeTransition(dissolve, before=moveinright)
-transform normal_right:
-    xalign 0.8
-    yalign 1.0
-transform normal_left:
-    xalign 0.2
-    yalign 1.0
-transform left:
-    xalign 0.15
-    yalign 1.0
-transform right:
-    xalign 0.85
-    yalign 1.0
-
-
-#персонажи
-image mom = "images/chars/mom.png"
-image dad = "images/chars/dad.png"
-image grandpa = "images/chars/grandpa.png"
-image brother = "images/chars/brother.png"
-
-label start:
+﻿label start:
 
     scene black 
     play music "audio/Terraria.mp3"
@@ -106,8 +42,19 @@ label start:
     scene airport with long_fade
     play music air_guitar
     "Выйдя с самолета и забрав гараж, я остановился перед выходом."
-    mc "Ещё немного и я дома." 
-    mc "Приеду и завалюсь спать, перелёт меня утомил."
+    mc "Ещё немного и я дома."
+
+    b_nvl "Здарова, братан, как житуха?"
+    mc_nvl "Нормас бро сам как ваще где тя искать"
+    nvl_narrator "1xbet"
+    nvl_narrator "1xbet"
+    nvl_narrator "1xbet"
+    nvl clear
+
+    mc "Приеду и завалюсь спать, перелёт меня утомил." 
+    
+    nvl show
+    pause 2.0
     
 
     scene airport_outside
